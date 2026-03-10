@@ -1,0 +1,16 @@
+{
+  "name": "node_js_week2",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Bless Kojo Dandzo",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "scripts": {
+    "start": "nodemon ."
+  },
+  "dependencies": {
+    "express": "^5.2.1"
+  }
+}
