@@ -1,39 +1,45 @@
+// IMPORTING EXPRESS
 const express = require("express");
 
+//CREATION OF SERVER
 const app = express();
 
+//REQUIRING PATHS
+const path = require("path");
+
+//MIDDLEWARE FUNCTIONS
+app.use(express.json());
+app.use(express.static(path.join(__dirname, "public")));
+
+app.use(express.urlencoded({ extended: true }));
+
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
+
+// SERVER ROUTES
 app.get("/", (req, res) => {
-  res.send("Welcome to Express server");
+  res.send(path.join(__dirname, "public", "index.html"));
 });
 
 app.get("/about", (req, res) => {
-  res.send("About this application");
+  res.send(path.join(__dirname, "public", "about.html"));
 });
 
-app.get("/contact", (req, res) => {
-  res.send("Contact page");
+app.post("/form", (req, res) => {
+  console.log(req.body);
+  res.send("Form has successfully been received");
 });
 
-app.get("/products", (req, res) => {
-  const products = [
-    { name: "Trumpet", type: "Brass", color: "Cooper" },
-    { name: "Cornet", type: "Brass", color: "Gold" },
-    { name: "Alto Saxophone", type: "Woodwind", color: "Silver" },
-    { name: "Tenor Saxophone", type: "Woodwind", color: "Antique" },
-  ];
-  res.json(products);
+app.put("/updated", (req, res) => {
+  res.send("Form has successfully been updated");
 });
 
-app.get("/api/user", (req, res) => {
-  const user = {
-    name: "Bless Kojo Dandzo",
-    age: "26 years",
-    location: "Adenta",
-    course: "UI / UX design",
-  };
-  res.json(user);
+app.delete("/deleted", (req, res) => {
+  res.send("Form has successfully been deleted");
 });
 
-app.listen(3000, "127.0.0.1", () => {
+app.listen(3020, "127.0.0.1", () => {
   console.log("My server is ready to operate");
 });
